@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ρυθμοί της Γης και Μνήμης - Η Διπλή Κληρονομιά του Βασιλί στα Φάρσαλα</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f1e8;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .presentation-container {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 10;
+        }
+
+        /* Νέο Header */
+        .slide-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px 20px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.95), rgba(245,241,232,0.95));
+            border-bottom: 2px solid #8a6d3b;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .municipality {
+            font-size: 0.8rem;
+            color: #2c5530;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        .presentation-main-title {
+            color: #2c5530;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .title-line-1 {
+            font-size: 1.2rem;
+            margin-bottom: 2px;
+        }
+
+        .title-line-2 {
+            font-size: 1.1rem;
+        }
+
+        .slide-title-header {
+            color: #8a6d3b;
+            font-size: 1rem;
+            font-weight: bold;
+            font-style: italic;
+            border-top: 1px solid #ddd;
+            padding-top: 5px;
+            margin-top: 5px;
+        }
+
+        .slide-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            flex: 1;
+            margin-top: 100px;
+            height: calc(100% - 100px);
+        }
+
+        .text-content {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-content {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .slide-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 3px solid #8a6d3b;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .slide-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .no-image .text-content {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .part-title {
+            color: #2c5530;
+            font-size: 1.8rem;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background-color: #8a6d3b;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .nav-btn:hover {
+            background-color: #6b4c2a;
+        }
+
+        .slide-counter {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 100;
+            background-color: rgba(44, 85, 48, 0.8);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* Lightbox Styles */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-image-container {
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .lightbox-close:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .lightbox-navigation {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            transform: translateY(-50%);
+            z-index: 2001;
+        }
+
+        .lightbox-nav-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .lightbox-nav-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        /* Προσαρμογή για landscape προσανατολισμό */
+        @media (orientation: landscape) {
+            .slide {
+                padding: 20px;
+            }
+            
+            .slide-content {
+                margin-top: 80px;
+                height: calc(100% - 80px);
+                flex-direction: row;
+            }
+            
+            .text-content, .image-content {
+                flex: 1;
+                min-width: 45%;
+                max-height: 85%;
+            }
+            
+            .image-content {
+                max-height: 85vh;
+            }
+            
+            .no-image .text-content {
+                width: 100%;
+                max-width: 90%;
+                margin: 0 auto;
+            }
+            
+            .title-line-1 {
+                font-size: 1.1rem;
+            }
+            
+            .title-line-2 {
+                font-size: 1rem;
+            }
+            
+            .slide-title-header {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Προσαρμογή για portrait προσανατολισμό */
+        @media (orientation: portrait) {
+            .slide {
+                padding: 15px;
+            }
+            
+            .slide-content {
+                margin-top: 110px;
+                height: calc(100% - 110px);
+                flex-direction: column;
+            }
+            
+            .text-content, .image-content {
+                min-width: 100%;
+                max-height: 45%;
+            }
+            
+            .image-content {
+                max-height: 50vh;
+            }
+            
+            .no-image .text-content {
+                height: auto;
+                min-height: 70%;
+            }
+            
+            .title-line-1 {
+                font-size: 1rem;
+            }
+            
+            .title-line-2 {
+                font-size: 0.9rem;
+            }
+            
+            .slide-title-header {
+                font-size: 0.9rem;
+            }
+            
+            .slide-counter {
+                bottom: 10px;
+                left: 10px;
+                padding: 6px 12px;
+                font-size: 1rem;
+            }
+            
+            .navigation {
+                bottom: 10px;
+                right: 10px;
+            }
+            
+            .nav-btn {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+            
+            .lightbox-nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Προσαρμογή για μικρές οθόνες */
+        @media (max-width: 768px) {
+            .slide-content {
+                gap: 20px;
+            }
+            
+            .text-content {
+                padding: 15px;
+            }
+            
+            .municipality {
+                font-size: 0.7rem;
+            }
+            
+            .lightbox-close {
+                top: 10px;
+                right: 10px;
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Προσαρμογή για πολύ μικρές οθόνες */
+        @media (max-width: 480px) {
+            .slide {
+                padding: 10px;
+            }
+            
+            .slide-header {
+                padding: 8px 10px;
+            }
+            
+            .slide-content {
+                margin-top: 100px;
+                height: calc(100% - 100px);
+                gap: 15px;
+            }
+            
+            .text-content {
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+            
+            .title-line-1 {
+                font-size: 0.9rem;
+            }
+            
+            .title-line-2 {
+                font-size: 0.8rem;
+            }
+            
+            .slide-title-header {
+                font-size: 0.8rem;
+            }
+            
+            .lightbox-nav-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Ειδικά στυλ για συγκεκριμένες διαφάνειες */
+        #slide1 .slide-content {
+            justify-content: center;
+            text-align: center;
+        }
+        
+        #slide1 .text-content {
+            max-width: 800px;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        
+        <!-- Lightbox Overlay -->
+        <div class="lightbox-overlay" id="lightbox">
+            <button class="lightbox-close" id="lightbox-close">&times;</button>
+            <div class="lightbox-navigation">
+                <button class="lightbox-nav-btn" id="lightbox-prev">&#10094;</button>
+                <button class="lightbox-nav-btn" id="lightbox-next">&#10095;</button>
+            </div>
+            <div class="lightbox-image-container">
+                <img src="" alt="" class="lightbox-image" id="lightbox-img">
+            </div>
+        </div>
+        
+        <!-- Διαφάνεια 1: Τίτλος -->
+        <div class="slide active" id="slide1">
+            <div class="slide-header">
+                <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                <div class="presentation-main-title">
+                    <div class="title-line-1">Ρυθμοί της Γης και Μνήμης</div>
+                    <div class="title-line-2">Η Διπλή Κληρονομιά του Βασιλί στα Φάρσαλα</div>
+                </div>
+                <div class="slide-title-header">Εισαγωγή</div>
+            </div>
+            <div class="slide-content">
+                <div class="text-content">
+                    <p>Καλώς ήρθατε σε ένα ταξίδι στον χρόνο και την παράδοση, το οποίο γεφυρώνει την ιστορία ενός μνημείου με τη ζωντανή δράση μιας κοινότητας.</p>
+                    <p>Ο Πύργος Καραμίχου στα Φάρσαλα φιλοξενεί μια σπουδαία έκθεση, καρπό της συστηματικής δουλειάς του Πολιτιστικού Συλλόγου Βασιλί.</p>
+                </div>
+                <div class="image-content">
+                    <img src="https://raw.githubusercontent.com/conchr/Vasili/main/Karamichos-Farmer.jpg" alt="Πύργος Καραμίχου και σκηνή αγροτικής εργασίας" class="slide-image" data-lightbox>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Διαφάνεια 2: Η Γεωγραφική και Ιστορική Εστίαση -->
+        <div class="slide" id="slide2">
+            <div class="slide-header">
+                <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                <div class="presentation-main-title">
+                    <div class="title-line-1">Ρυθμοί της Γης και Μνήμης</div>
+                    <div class="title-line-2">Η Διπλή Κληρονομιά του Βασιλί στα Φάρσαλα</div>
+                </div>
+                <div class="slide-title-header">Η Γεωγραφική και Ιστορική Εστίαση</div>
+            </div>
+            <div class="slide-content">
+                <div class="text-content">
+                    <p>Ο οικισμός Βασιλί βρίσκεται στην εύφορη κοιλάδα του ποταμού Ενιπέα, λίγα χιλιόμετρα έξω από τα Φάρσαλα, επί της οδικής αρτηρίας που οδηγεί προς τη Λάρισα.</p>
+                    <p>Αυτή η γεωγραφική θέση έχει καθορίσει την ιστορία και την ταυτότητα των κατοίκων, που είναι άρρηκτα συνδεδεμένη με τη γεωργία.</p>
+                </div>
+                <div class="image-content">
+                    <img src="https://raw.githubusercontent.com/conchr/Vasili/main/FarsalaMap.jpg" alt="Χάρτης της Θεσσαλίας με επισήμανση της περιοχής Φαρσάλων" class="slide-image" data-lightbox>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Διαφάνεια 3: Ο Πύργος Καραμίχου: Το Μνημείο -->
+        <div class="slide" id="slide3">
+            <div class="slide-header">
+                <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                <div class="presentation-main-title">
+                    <div class="title-line-1">Ρυθμοί της Γης και Μνήμης</div>
+                    <div class="title-line-2">Η Διπλή Κληρονομιά του Βασιλί στα Φάρσαλα</div>
+                </div>
+                <div class="slide-title-header">Ο Πύργος Καραμίχου: Το Μνημείο</div>
+            </div>
+            <div class="slide-content">
+                <div class="text-content">
+                    <p>Ο χώρος που φιλοξενεί την έκθεση είναι ο Πύργος Καραμίχου, το μοναδικό σωζόμενο πυργόσπιτο της ευρύτερης επαρχίας των Φαρσάλων, ένα επιβλητικό ιστορικό μνημείο.</p>
+                </div>
+                <div class="image-content">
+                    <img src="https://raw.githubusercontent.com/conchr/Vasili/main/%CE%9A%CE%B1%CF%81%CE%B1%CE%BC%CE%AF%CF%87%CE%BF%CF%821.jpg" alt="Εντυπωσιακή εξωτερική φωτογραφία του Πύργου" class="slide-image" data-lightbox>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Διαφάνεια 4: Γέννηση στην Τουρκοκρατία -->
+        <div class="slide" id="slide4">
+            <div class="slide-header">
+                <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                <div class="presentation-main-title">
+                    <div class="title-line-1">Ρυθμοί της Γης και Μνήμης</div>
+                    <div class="title-line-2">Η Διπλή Κληρονομιά του Βασιλί στα Φάρσαλα</div>
+                </div>
+                <div class="slide-title-header">Γέννηση στην Τουρκοκρατία (18ος αιώνας)</div>
+            </div>
+            <div class="slide-content">
+                <div class="text-content">
+                    <p>Η κατασκευή του Πύργου χρονολογείται στον 18ο αιώνα, στα χρόνια της Τουρκοκρατίας στη Θεσσαλία, και αρχικά ανήκε σε Τούρκους.</p>
+                </div>
+                <div class="image-content">
+                    <img src="https://raw.githubusercontent.com/conchr/Vasili/main/%CE%9A%CE%B1%CF%81%CE%B1%CE%BC%CE%AF%CF%87%CE%BF%CF%822.jpg" alt="Ιστορικό υλικό της Θεσσαλίας του 18ου αιώνα" class="slide-image" data-lightbox>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Διαφάνεια 5: Η Ιστορία των Ιδιοκτητών -->
+        <div class="slide" id="slide5">
+            <div class="slide-header">
+                <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                <div class="presentation-main-title">
+                    <div class="title-line-1">Ρυθμοί της Γης και Μνήμης</div>
+                    <div class="title-line-2">Η Διπλή Κληρονομιά του Βασιλί στα Φάρσαλα</div>
+                </div>
+                <div class="slide-title-header">Η Ιστορία των Ιδιοκτητών</div>
+            </div>
+            <div class="slide-content">
+                <div class="text-content">
+                    <p>Μετά την απελευθέρωση, ο Πύργος περιήλθε στην οικογένεια Πανταζή και εν συνεχεία στην οικογένεια του εμπόρου Καραμίχου, ο οποίος καταγόταν από την περιοχή του Ασπροποτάμου.</p>
+                </div>
+                <div class="image-content">
+                    <img src="https://raw.githubusercontent.com/conchr/Vasili/main/%CE%9A%CE%B1%CF%81%CE%B1%CE%BC%CE%AF%CF%87%CE%BF%CF%824.jpg" alt="Φωτογραφία του ανακατασκευασμένου εσωτερικού του Πύργου" class="slide-image" data-lightbox>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Διαφάνεια 6: Ο Θρύλος του Λιμού -->
+        <div class="slide no-image" id="slide6">
+            <div class="slide-header">
+                <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                <div class="presentation-main-title">
+                    <div class="title-line-1">Ρυθμοί της Γης και Μνήμης</div>
+                    <div class="title-line-2">Η Διπλή Κληρονομιά του Βασιλί στα Φάρσαλα</div>
+                </div>
+                <div class="slide-title-header">Ο Θρύλος του Λιμού</div>
+            </div>
+            <div class="slide-content">
+                <div class="text-content">
+                    <p>Μια τοπική παράδοση αναφέρει ότι ο Καραμίχος πέθανε σε ηλικία 35 ετών από λιμό. Ο θάνατός του φέρεται να προκλήθηκε από μόλυνση της δεξαμενής ύδρευσης της πόλης.</p>
+                    <p>Μετά το τραγικό αυτό γεγονός, η οικογένεια Καραμίχου εγκατέλειψε την περιοχή.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Διαφάνεια 7: Η Αναγέννηση: Κέντρο Ψηφιακής Φωτογραφίας -->
+        <div class="slide no-image" id="slide7">
+            <div class="slide-header">
+                <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                <div class="presentation-main-title">
+                    <div class="title-line-1">Ρυθμοί της Γης και Μνήμης</div>
+                    <div class="title-line-2">Η Διπλή Κληρονομιά του Βασιλί στα Φάρσαλα</div>
+                </div>
+                <div class="slide-title-header">Η Αναγέννηση: Κέντρο Ψηφιακής Φωτογραφίας</div>
+            </div>
+            <div class="slide-content">
+                <div class="text-content">
+                    <p>Ο Πύργος, χαρακτηρισμένος διατηρητέο μνημείο, πέρασε στον Δήμο Φαρσάλων, ανακατασκευάστηκε και από τον Σεπτέμβριο του 2022 λειτουργεί ως Κέντρο Ψηφιακής Φωτογραφίας της νεότερης τοπικής ιστορίας των Φαρσάλων.</p>
+                    <p>Έτσι, ένα μνημείο του 18ου αιώνα ζωντανεύει με τη βοήθεια νέων τεχνολογιών.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Διαφάνεια 8: Ο Τίτλος Που Τα Λέει Όλα -->
+        <div class="slide" id="slide8">
+            <div class="slide-header">
+                <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                <div class="presentation-main-title">
+                    <div class="title-line-1">Ρυθμοί της Γης και Μνήμης</div>
+                    <div class="title-line-2">Η Διπλή Κληρονομιά του Βασιλί στα Φάρσαλα</div>
+                </div>
+                <div class="slide-title-header">Ο Τίτλος Που Τα Λέει Όλα</div>
+            </div>
+            <div class="slide-content">
+                <div class="text-content">
+                    <p>Η έκθεση του Πολιτιστικού Συλλόγου Βασιλί φέρει τον τίτλο:</p>
+                    <p style="font-style: italic; font-weight: bold; color: #8a6d3b; font-size: 1.2rem; margin: 15px 0;">«Ρυθμοί της Γης, Ανάσες των Ανθρώπων. Από το όργωμα στον αργαλειό: Εικόνες ζωής από την ελληνική ύπαιθρο»</p>
+                    <p>Ο τίτλος υπογραμμίζει τη σύνδεση της αγροτικής εργασίας («όργωμα») με την οικογενειακή και κοινωνική ζωή («αργαλειός»).</p>
+                </div>
+                <div class="image-content">
+                    <img src="https://raw.githubusercontent.com/conchr/Vasili/main/%CE%92%CE%B1%CF%83%CE%B9%CE%BB%CE%B91.webp" alt="Κολάζ αγροτικής εργασίας" class="slide-image" data-lightbox>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Διαφάνεια 9: Εικόνες Ζωής Πριν τη Μεγάλη Αλλαγή -->
+        <div class="slide" id="slide9">
+            <div class="slide-header">
+                <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                <div class="presentation-main-title">
+                    <div class="title-line-1">Ρυθμοί της Γης και Μνήμης</div>
+                    <div class="title-line-2">Η Διπλή Κληρονομιά του Βασιλί στα Φάρσαλα</div>
+                </div>
+                <div class="slide-title-header">Εικόνες Ζωής Πριν τη Μεγάλη Αλλαγή</div>
+            </div>
+            <div class="slide-content">
+                <div class="text-content">
+                    <p>Η έκθεση εστιάζει στον τρόπο ζωής της υπαίθρου, καλύπτοντας την περίοδο προπολεμικά και μεταπολεμικά.</p>
+                    <p>Πρόκειται για μια πολύτιμη καταγραφή της ζωής των προγόνων μας, πριν τη ριζική αλλαγή του αγροτικού τοπίου λόγω της βιομηχανοποίησης και της τεχνολογικής προόδου.</p>
+                </div>
+                <div class="image-content">
+                    <img src="https://raw.githubusercontent.com/conchr/Vasili/main/%CE%92%CE%B1%CF%83%CE%B9%CE%BB%CE%AF%202.jpg" alt="Παραδοσιακές μέθοδοι εργασίας" class="slide-image" data-lightbox>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Διαφάνεια 10: Η Πηγή των Εκθεμάτων: Αναβίωση -->
+        <div class="slide no-image" id="slide10">
+            <div class="slide-header">
+                <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                <div class="presentation-main-title">
+                    <div class="title-line-1">Ρυθμοί της Γης και Μνήμης</div>
+                    <div class="title-line-2">Η Διπλή Κληρονομιά του Βασιλί στα Φάρσαλα</div>
+                </div>
+                <div class="slide-title-header">Η Πηγή των Εκθεμάτων: Αναβίωση</div>
+            </div>
+            <div class="slide-content">
+                <div class="text-content">
+                    <p>Το υλικό της έκθεσης έχει μια μοναδική προέλευση: δεν είναι απλώς παλιά αρχεία, αλλά φωτογραφίες που προέκυψαν από μια σειρά αναβιώσεων αγροτικών εργασιών και σκηνών οικογενειακής ζωής.</p>
+                    <p>Ο Σύλλογος Βασιλί πραγματοποιεί συστηματικά αυτές τις βιωματικές αναπαραστάσεις τα τελευταία τέσσερα χρόνια.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Διαφάνεια 11: Ο Ρόλος του Φωτογράφου -->
+        <div class="slide" id="slide11">
+            <div class="slide-header">
+                <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                <div class="presentation-main-title">
+                    <div class="title-line-1">Ρυθμοί της Γης και Μνήμης</div>
+                    <div class="title-line-2">Η Διπλή Κληρονομιά του Βασιλί στα Φάρσαλα</div>
+                </div>
+                <div class="slide-title-header">Ο Ρόλος του Φωτογράφου</div>
+            </div>
+            <div class="slide-content">
+                <div class="text-content">
+                    <p>Η μετάφραση της βιωματικής δράσης σε καλλιτεχνικό έργο επιτεύχθηκε χάρη στην «εξαιρετική φωτογραφική ματιά του Χρήστου Παύλου», ο οποίος κατάφερε να αποδώσει με πιστότητα τον προπολεμικό και μεταπολεμικό τρόπο ζωής της υπαίθρου.</p>
+                </div>
+                <div class="image-content">
+                    <img src="https://raw.githubusercontent.com/conchr/Vasili/main/%CE%9A%CE%B1%CF%81%CE%B1%CE%BC%CE%AF%CF%87%CE%BF%CF%824.jpg" alt="Υψηλής ποιότητας ασπρόμαυρη φωτογραφία από την έκθεση" class="slide-image" data-lightbox>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Διαφάνεια 12: Τα Υλικά Τεκμήρια -->
+        <div class="slide no-image" id="slide12">
+            <div class="slide-header">
+                <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                <div class="presentation-main-title">
+                    <div class="title-line-1">Ρυθμοί της Γης και Μνήμης</div>
+                    <div class="title-line-2">Η Διπλή Κληρονομιά του Βασιλί στα Φάρσαλα</div>
+                </div>
+                <div class="slide-title-header">Τα Υλικά Τεκμήρια</div>
+            </div>
+            <div class="slide-content">
+                <div class="text-content">
+                    <p>Πέραν του φωτογραφικού υλικού, η έκθεση πλαισιώνεται και από υλικά τεκμήρια, καθώς εκτίθεται και μέρος της λαογραφικής συλλογής του Ηλία Δημόπουλου, προσθέτοντας βάθος στην αφήγηση της αγροτικής ζωής.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Διαφάνεια 13: Μακραίωνη Ιστορία: Η Περιοχή της Φθίας -->
+        <div class="slide" id="slide13">
+            <div class="slide-header">
+                <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                <div class="presentation-main-title">
+                    <div class="title-line-1">Ρυθμοί της Γης και Μνήμης</div>
+                    <div class="title-line-2">Η Διπλή Κληρονομιά του Βασιλί στα Φάρσαλα</div>
+                </div>
+                <div class="slide-title-header">Μακραίωνη Ιστορία: Η Περιοχή της Φθίας</div>
+            </div>
+            <div class="slide-content">
+                <div class="text-content">
+                    <p>Η ευρύτερη περιοχή των Φαρσάλων, όπου ανήκει το Βασιλί, έχει συνεχή κατοίκηση από τη Νεολιθική περίοδο.</p>
+                    <p>Η αρχαία Φάρσαλος ταυτίζεται με την ομηρική Φθία, την πατρίδα του Αχιλλέα και των Μυρμιδόνων.</p>
+                </div>
+                <div class="image-content">
+                    <img src="https://raw.githubusercontent.com/conchr/Vasili/main/FarsalaMap.jpg" alt="Χάρτης της περιοχής Φαρσάλων" class="slide-image" data-lightbox>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Διαφάνεια 14: Η Παλαιά Ονομασία: «Οντοκλάρι» -->
+        <div class="slide no-image" id="slide14">
+            <div class="slide-header">
+                <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                <div class="presentation-main-title">
+                    <div class="title-line-1">Ρυθμοί της Γης και Μνήμης</div>
+                    <div class="title-line-2">Η Διπλή Κληρονομιά του Βασιλί στα Φάρσαλα</div>
+                </div>
+                <div class="slide-title-header">Η Παλαιά Ονομασία: «Οντοκλάρι»</div>
+            </div>
+            <div class="slide-content">
+                <div class="text-content">
+                    <p>Ιστορικές αναφορές υποδεικνύουν ότι το Βασιλί κατά την Οθωμανική περίοδο πιθανώς ταυτιζόταν με το χωριό «Οντοκλάρι».</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Διαφάνεια 15: Πότε και Πώς Κατοικήθηκε; -->
+        <div class="slide" id="slide15">
+            <div class="slide-header">
+                <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                <div class="presentation-main-title">
+                    <div class="title-line-1">Ρυθμοί της Γης και Μνήμης</div>
+                    <div class="title-line-2">Η Διπλή Κληρονομιά του Βασιλί στα Φάρσαλα</div>
+                </div>
+                <div class="slide-title-header">Πότε και Πώς Κατοικήθηκε;</div>
+            </div>
+            <div class="slide-content">
+                <div class="text-content">
+                    <p>Η κατοίκηση της περιοχής Βασιλί χρονολογείται τουλάχιστον από την Οθωμανική περίοδο, καθώς αναφέρεται ως μικρό χωριό («Οντοκλάρι») στον κεντρικό δρόμο Λάρισας–Φαρσάλων.</p>
+                    <p>Αυτή η στρατηγική θέση συνετέλεσε στη μακρά του ιστορία, με τη σημερινή ονομασία να δίνεται αργότερα, στο πλαίσιο της μετονομασίας τοπωνυμίων.</p>
+                </div>
+                <div class="image-content">
+                    <img src="https://raw.githubusercontent.com/conchr/Vasili/main/passa%203.jpg" alt="Παλιά φωτογραφία του χωριού" class="slide-image" data-lightbox>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Διαφάνεια 16: Οι Κάτοικοι και το Επάγγελμα: Η Γη -->
+        <div class="slide no-image" id="slide16">
+            <div class="slide-header">
+                <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                <div class="presentation-main-title">
+                    <div class="title-line-1">Ρυθμοί της Γης και Μνήμης</div>
+                    <div class="title-line-2">Η Διπλή Κληρονομιά του Βασιλί στα Φάρσαλα</div>
+                </div>
+                <div class="slide-title-header">Οι Κάτοικοι και το Επάγγελμα: Η Γη</div>
+            </div>
+            <div class="slide-content">
+                <div class="text-content">
+                    <p>Η ζωή των κατοίκων του Βασιλί είναι αδιάρρηκτα συνδεδεμένη με τη γεωργία. Η ομάδα παραγωγών της περιοχής καλλιεργεί κυρίως σιτηρά και δημητριακά (όπως σπορόκεντρο σιτάρι, κριθάρι, καλαμπόκι), αλλά και ψυχανθή, με ιδιαίτερη έμφαση στο ρεβίθι και τις φακές.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Διαφάνεια 17: Η Δύναμη του Συνεταιρισμού -->
+        <div class="slide no-image" id="slide17">
+            <div class="slide-header">
+                <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                <div class="presentation-main-title">
+                    <div class="title-line-1">Ρυθμοί της Γης και Μνήμης</div>
+                    <div class="title-line-2">Η Διπλή Κληρονομιά του Βασιλί στα Φάρσαλα</div>
+                </div>
+                <div class="slide-title-header">Η Δύναμη του Συνεταιρισμού</div>
+            </div>
+            <div class="slide-content">
+                <div class="text-content">
+                    <p>Η συλλογική δράση είναι πυλώνας της κοινότητας. Ο Αγροτικός Συνεταιρισμός Βασιλί (ΑΣΒ) ιδρύθηκε το 1954 με έδρα το χωριό και σήμερα αριθμεί 101 μέλη.</p>
+                    <p>Ο Συνεταιρισμός λειτουργεί με τις αρχές της συνέπειας και της διαφάνειας, με σύνθημα: «Ο Συνεταιρισμός σημαίνει εμείς και όχι εγώ».</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Διαφάνεια 18: Η Δημογραφική Πρόκληση των Φαρσάλων -->
+        <div class="slide no-image" id="slide18">
+            <div class="slide-header">
+                <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                <div class="presentation-main-title">
+                    <div class="title-line-1">Ρυθμοί της Γης και Μνήμης</div>
+                    <div class="title-line-2">Η Διπλή Κληρονομιά του Βασιλί στα Φάρσαλα</div>
+                </div>
+                <div class="slide-title-header">Η Δημογραφική Πρόκληση των Φαρσάλων</div>
+            </div>
+            <div class="slide-content">
+                <div class="text-content">
+                    <p>Ο Δήμος Φαρσάλων αντιμετωπίζει σημαντική δημογραφική συρρίκνωση.</p>
+                    <p>Ο μόνιμος πληθυσμός μειώθηκε από 18.545 κατοίκους στην Απογραφή του 2011, σε 16.341 στην Απογραφή του 2021.</p>
+                    <p>Αυτή η μείωση, μαζί με τη γήρανση, επηρεάζει την παραγωγική διαδικασία.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Διαφάνεια 19: Πολιτισμός: Ο Μηχανισμός Ανθεκτικότητας -->
+        <div class="slide no-image" id="slide19">
+            <div class="slide-header">
+                <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                <div class="presentation-main-title">
+                    <div class="title-line-1">Ρυθμοί της Γης και Μνήμης</div>
+                    <div class="title-line-2">Η Διπλή Κληρονομιά του Βασιλί στα Φάρσαλα</div>
+                </div>
+                <div class="slide-title-header">Πολιτισμός: Ο Μηχανισμός Ανθεκτικότητας</div>
+            </div>
+            <div class="slide-content">
+                <div class="text-content">
+                    <p>Σε ένα περιβάλλον δημογραφικής συρρίκνωσης, η ύπαρξη ενός τόσο ενεργού Πολιτιστικού Συλλόγου όπως αυτός του Βασιλί, με τις συστηματικές αναβιώσεις, λειτουργεί ως μηχανισμός κοινωνικής ανθεκτικότητας.</p>
+                    <p>Προσδίδει υπεραξία και νόημα στην παραμονή στην ύπαιθρο, διατηρώντας ζωντανή την τοπική ταυτότητα.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Διαφάνεια 20: Μια Επίκαιρη Ανάγκη -->
+        <div class="slide no-image" id="slide20">
+            <div class="slide-header">
+                <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                <div class="presentation-main-title">
+                    <div class="title-line-1">Ρυθμοί της Γης και Μνήμης</div>
+                    <div class="title-line-2">Η Διπλή Κληρονομιά του Βασιλί στα Φάρσαλα</div>
+                </div>
+                <div class="slide-title-header">Μια Επίκαιρη Ανάγκη</div>
+            </div>
+            <div class="slide-content">
+                <div class="text-content">
+                    <p>Η καταγραφή του παραδοσιακού τρόπου ζωής, που αποτελεί τον πυρήνα της έκθεσης, είναι εξαιρετικά επίκαιρη.</p>
+                    <p>Η αγροτική πεδιάδα είναι ευάλωτη σε ακραία φαινόμενα, όπως οι πλημμύρες του 2020, όπου ο Ενιπέας έφτασε σε οριακό σημείο.</p>
+                    <p>Η μελέτη της παραδοσιακής γνώσης μπορεί να προσφέρει απαντήσεις για την ανθεκτικότητα του αγροτικού συστήματος εν μέσω κλιματικής κρίσης.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Διαφάνεια 21: Πρόταση 1: Διαδρομές Αγροτικής Κληρονομιάς -->
+        <div class="slide no-image" id="slide21">
+            <div class="slide-header">
+                <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                <div class="presentation-main-title">
+                    <div class="title-line-1">Ρυθμοί της Γης και Μνήμης</div>
+                    <div class="title-line-2">Η Διπλή Κληρονομιά του Βασιλί στα Φάρσαλα</div>
+                </div>
+                <div class="slide-title-header">Πρόταση 1: Διαδρομές Αγροτικής Κληρονομιάς</div>
+            </div>
+            <div class="slide-content">
+                <div class="text-content">
+                    <p>Για την περαιτέρω αξιοποίηση, προτείνεται η ανάπτυξη εκπαιδευτικών και τουριστικών διαδρομών.</p>
+                    <p>Αυτές οι διαδρομές θα πρέπει να συνδέουν θεσμικά τον Πύργο Καραμίχου (Κέντρο Ψηφιακής Φωτογραφίας) με τον οικισμό Βασιλί (Τόπος Αναβιώσεων) και τις εγκαταστάσεις του Αγροτικού Συνεταιρισμού (Οργάνωση Παραγωγής του 1954).</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Διαφάνεια 22: Πρόταση 2: Brand Identity και Τουρισμός -->
+        <div class="slide no-image" id="slide22">
+            <div class="slide-header">
+                <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                <div class="presentation-main-title">
+                    <div class="title-line-1">Ρυθμοί της Γης και Μνήμης</div>
+                    <div class="title-line-2">Η Διπλή Κληρονομιά του Βασιλί στα Φάρσαλα</div>
+                </div>
+                <div class="slide-title-header">Πρόταση 2: Brand Identity και Τουρισμός</div>
+            </div>
+            <div class="slide-content">
+                <div class="text-content">
+                    <p>Η πολιτιστική αφήγηση των «Ρυθμών της Γης» πρέπει να ενσωματωθεί στο εμπορικό σήμα των προϊόντων του Αγροτικού Συνεταιρισμού Βασιλί, ιδίως των ψυχανθών.</p>
+                    <p>Η σύνδεση της ποιότητας με τη διατηρούμενη παράδοση ενισχύει την υπεραξία των προϊόντων και την αναγνώριση του Βασιλί ως πόλου πολιτιστικού τουρισμού, συμβάλλοντας στην οικονομική βιωσιμότητα της κοινότητας.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-counter"><span id="current-slide">1</span>/<span id="total-slides">22</span></div>
+        
+        <div class="navigation">
+            <button class="nav-btn" id="prev-btn">Προηγούμενη</button>
+            <button class="nav-btn" id="next-btn">Επόμενη</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const currentSlideSpan = document.getElementById('current-slide');
+            const totalSlidesSpan = document.getElementById('total-slides');
+            
+            // Lightbox elements
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxClose = document.getElementById('lightbox-close');
+            const lightboxPrev = document.getElementById('lightbox-prev');
+            const lightboxNext = document.getElementById('lightbox-next');
+            
+            let currentSlideIndex = 0;
+            const totalSlides = slides.length;
+            
+            // Store all images with lightbox functionality
+            const lightboxImages = document.querySelectorAll('.slide-image[data-lightbox]');
+            let currentLightboxImageIndex = 0;
+            
+            totalSlidesSpan.textContent = totalSlides;
+            
+            // Αρχικοποίηση: εμφάνιση πρώτης διαφάνειας
+            slides[currentSlideIndex].classList.add('active');
+            updateSlideCounter();
+            
+            // Λειτουργία για επόμενη διαφάνεια
+            nextBtn.addEventListener('click', function() {
+                if (currentSlideIndex < totalSlides - 1) {
+                    slides[currentSlideIndex].classList.remove('active');
+                    currentSlideIndex++;
+                    slides[currentSlideIndex].classList.add('active');
+                    updateSlideCounter();
+                }
+            });
+            
+            // Λειτουργία για προηγούμενη διαφάνεια
+            prevBtn.addEventListener('click', function() {
+                if (currentSlideIndex > 0) {
+                    slides[currentSlideIndex].classList.remove('active');
+                    currentSlideIndex--;
+                    slides[currentSlideIndex].classList.add('active');
+                    updateSlideCounter();
+                }
+            });
+            
+            // Πλοήγηση με πλήκτρα πληκτρολογίου
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'ArrowRight' || event.key === ' ' || event.key === 'PageDown') {
+                    // Δεξί βέλος, space ή PageDown για επόμενη διαφάνεια
+                    if (currentSlideIndex < totalSlides - 1) {
+                        slides[currentSlideIndex].classList.remove('active');
+                        currentSlideIndex++;
+                        slides[currentSlideIndex].classList.add('active');
+                        updateSlideCounter();
+                    }
+                    event.preventDefault();
+                } else if (event.key === 'ArrowLeft' || event.key === 'PageUp') {
+                    // Αριστερό βέλος ή PageUp για προηγούμενη διαφάνεια
+                    if (currentSlideIndex > 0) {
+                        slides[currentSlideIndex].classList.remove('active');
+                        currentSlideIndex--;
+                        slides[currentSlideIndex].classList.add('active');
+                        updateSlideCounter();
+                    }
+                    event.preventDefault();
+                } else if (event.key === 'Escape') {
+                    // Escape για κλείσιμο lightbox
+                    closeLightbox();
+                }
+            });
+            
+            // Ενημέρωση του μετρητή διαφανειών
+            function updateSlideCounter() {
+                currentSlideSpan.textContent = currentSlideIndex + 1;
+            }
+            
+            // Απενεργοποίηση κλικ σε διαφάνεια για αλλαγή σελίδας
+            // Δεν προσθέτουμε event listener για κλικ στις διαφάνειες
+            
+            // Προσθήκη support για swipe gestures σε κινητές συσκευές
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            document.addEventListener('touchstart', function(event) {
+                touchStartX = event.changedTouches[0].screenX;
+            }, false);
+            
+            document.addEventListener('touchend', function(event) {
+                touchEndX = event.changedTouches[0].screenX;
+                handleSwipe();
+            }, false);
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                
+                if (touchEndX < touchStartX - swipeThreshold) {
+                    // Swipe αριστερά - επόμενη διαφάνεια
+                    if (currentSlideIndex < totalSlides - 1) {
+                        slides[currentSlideIndex].classList.remove('active');
+                        currentSlideIndex++;
+                        slides[currentSlideIndex].classList.add('active');
+                        updateSlideCounter();
+                    }
+                }
+                
+                if (touchEndX > touchStartX + swipeThreshold) {
+                    // Swipe δεξιά - προηγούμενη διαφάνεια
+                    if (currentSlideIndex > 0) {
+                        slides[currentSlideIndex].classList.remove('active');
+                        currentSlideIndex--;
+                        slides[currentSlideIndex].classList.add('active');
+                        updateSlideCounter();
+                    }
+                }
+            }
+            
+            // Lightbox functionality
+            lightboxImages.forEach((img, index) => {
+                img.addEventListener('click', function() {
+                    openLightbox(index);
+                });
+            });
+            
+            function openLightbox(index) {
+                currentLightboxImageIndex = index;
+                lightboxImg.src = lightboxImages[index].src;
+                lightboxImg.alt = lightboxImages[index].alt;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            
+            function showNextLightboxImage() {
+                currentLightboxImageIndex = (currentLightboxImageIndex + 1) % lightboxImages.length;
+                lightboxImg.src = lightboxImages[currentLightboxImageIndex].src;
+                lightboxImg.alt = lightboxImages[currentLightboxImageIndex].alt;
+            }
+            
+            function showPrevLightboxImage() {
+                currentLightboxImageIndex = (currentLightboxImageIndex - 1 + lightboxImages.length) % lightboxImages.length;
+                lightboxImg.src = lightboxImages[currentLightboxImageIndex].src;
+                lightboxImg.alt = lightboxImages[currentLightboxImageIndex].alt;
+            }
+            
+            // Lightbox event listeners
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightboxNext.addEventListener('click', showNextLightboxImage);
+            lightboxPrev.addEventListener('click', showPrevLightboxImage);
+            
+            // Close lightbox when clicking on the overlay (but not the image)
+            lightbox.addEventListener('click', function(event) {
+                if (event.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+            
+            // Keyboard navigation for lightbox
+            document.addEventListener('keydown', function(event) {
+                if (lightbox.classList.contains('active')) {
+                    if (event.key === 'ArrowRight') {
+                        showNextLightboxImage();
+                    } else if (event.key === 'ArrowLeft') {
+                        showPrevLightboxImage();
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
