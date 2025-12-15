@@ -13,7 +13,7 @@
         }
 
         body {
-            background-color: #f5f1e8;
+            background-color: #1a237e; /* Βαθύ μπλέ φόντο */
             color: #333;
             line-height: 1.6;
             overflow-x: hidden;
@@ -48,22 +48,71 @@
             z-index: 10;
         }
 
-        /* Νέο Header */
+        /* Ειδικό στυλ για βαθύ μπλέ φόντο σε όλες τις διαφάνειες */
+        .slide {
+            background-color: #1a237e;
+            color: white;
+        }
+
+        .title-slide {
+            background-color: #1a237e;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .title-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .main-title {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+
+        .subtitle {
+            font-size: 2.5rem;
+            font-weight: normal;
+            margin-bottom: 4rem;
+            color: #bbdefb;
+            font-style: italic;
+        }
+
+        .creator {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 1rem;
+            color: #bbdefb;
+            letter-spacing: 1px;
+        }
+
+        /* Νέο Header για τις κανονικές διαφάνειες */
         .slide-header {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             padding: 10px 20px;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.95), rgba(245,241,232,0.95));
-            border-bottom: 2px solid #8a6d3b;
+            background: rgba(26, 35, 126, 0.9);
+            border-bottom: 2px solid #bbdefb;
             z-index: 1000;
             text-align: center;
         }
 
         .municipality {
             font-size: 0.8rem;
-            color: #2c5530;
+            color: #bbdefb;
             font-weight: bold;
             letter-spacing: 1px;
             margin-bottom: 5px;
@@ -71,7 +120,7 @@
         }
 
         .presentation-main-title {
-            color: #2c5530;
+            color: white;
             font-weight: bold;
             margin-bottom: 5px;
         }
@@ -79,18 +128,20 @@
         .title-line-1 {
             font-size: 1.2rem;
             margin-bottom: 2px;
+            color: white;
         }
 
         .title-line-2 {
             font-size: 1.1rem;
+            color: white;
         }
 
         .slide-title-header {
-            color: #8a6d3b;
+            color: #bbdefb;
             font-size: 1rem;
             font-weight: bold;
             font-style: italic;
-            border-top: 1px solid #ddd;
+            border-top: 1px solid #bbdefb;
             padding-top: 5px;
             margin-top: 5px;
         }
@@ -110,9 +161,10 @@
             flex: 1;
             min-width: 300px;
             padding: 20px;
-            background-color: rgba(255, 255, 255, 0.85);
+            background-color: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            color: white;
         }
 
         .image-content {
@@ -130,14 +182,14 @@
             height: 100%;
             object-fit: contain;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            border: 3px solid #8a6d3b;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 3px solid #bbdefb;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .slide-image:hover {
             transform: scale(1.02);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
         }
 
         .no-image .text-content {
@@ -146,34 +198,15 @@
         }
 
         .part-title {
-            color: #2c5530;
+            color: #bbdefb;
             font-size: 1.8rem;
             margin-top: 20px;
             margin-bottom: 10px;
         }
 
+        /* Αφαιρέσαμε τα κουμπιά πλοήγησης αλλά κρατάμε την περιοχή για μετρητή */
         .navigation {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 100;
-            display: flex;
-            gap: 10px;
-        }
-
-        .nav-btn {
-            background-color: #8a6d3b;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-
-        .nav-btn:hover {
-            background-color: #6b4c2a;
+            display: none; /* Αφαιρούμε τα κουμπιά */
         }
 
         .slide-counter {
@@ -181,8 +214,8 @@
             bottom: 20px;
             left: 20px;
             z-index: 100;
-            background-color: rgba(44, 85, 48, 0.8);
-            color: white;
+            background-color: rgba(187, 222, 251, 0.8);
+            color: #1a237e;
             padding: 8px 15px;
             border-radius: 20px;
             font-weight: bold;
@@ -318,6 +351,14 @@
             .slide-title-header {
                 font-size: 0.9rem;
             }
+            
+            .main-title {
+                font-size: 3rem;
+            }
+            
+            .subtitle {
+                font-size: 2rem;
+            }
         }
 
         /* Προσαρμογή για portrait προσανατολισμό */
@@ -365,20 +406,24 @@
                 font-size: 1rem;
             }
             
-            .navigation {
-                bottom: 10px;
-                right: 10px;
-            }
-            
-            .nav-btn {
-                padding: 10px 16px;
-                font-size: 0.9rem;
-            }
-            
             .lightbox-nav-btn {
                 width: 40px;
                 height: 40px;
                 font-size: 1.2rem;
+            }
+            
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.8rem;
+                margin-bottom: 3rem;
+            }
+            
+            .creator {
+                font-size: 0.9rem;
+                bottom: 20px;
             }
         }
 
@@ -400,6 +445,14 @@
                 top: 10px;
                 right: 10px;
                 font-size: 1.5rem;
+            }
+            
+            .main-title {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.6rem;
             }
         }
 
@@ -441,17 +494,31 @@
                 height: 35px;
                 font-size: 1rem;
             }
+            
+            .main-title {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.4rem;
+                margin-bottom: 3rem;
+            }
+            
+            .creator {
+                font-size: 0.8rem;
+                bottom: 15px;
+            }
         }
 
         /* Ειδικά στυλ για συγκεκριμένες διαφάνειες */
-        #slide1 .slide-content {
+        #slide2 .slide-content {
             justify-content: center;
             text-align: center;
         }
         
-        #slide1 .text-content {
+        #slide2 .text-content {
             max-width: 800px;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.1);
         }
     </style>
 </head>
@@ -470,8 +537,17 @@
             </div>
         </div>
         
-        <!-- Διαφάνεια 1: Τίτλος -->
-        <div class="slide active" id="slide1">
+        <!-- Νέα Αρχική Σελίδα -->
+        <div class="slide title-slide active" id="slide1">
+            <div class="title-content">
+                <h1 class="main-title">Πύργος Καραμίχου</h1>
+                <h2 class="subtitle">Ρυθμοί της Γης και Μνήμης</h2>
+            </div>
+            <div class="creator">Created by Konstantinos Christodoulou</div>
+        </div>
+        
+        <!-- Διαφάνεια 2: Τίτλος (πρώην slide1) -->
+        <div class="slide" id="slide2">
             <div class="slide-header">
                 <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
                 <div class="presentation-main-title">
@@ -491,8 +567,8 @@
             </div>
         </div>
         
-        <!-- Διαφάνεια 2: Η Γεωγραφική και Ιστορική Εστίαση -->
-        <div class="slide" id="slide2">
+        <!-- Διαφάνεια 3: Η Γεωγραφική και Ιστορική Εστίαση (πρώην slide2) -->
+        <div class="slide" id="slide3">
             <div class="slide-header">
                 <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
                 <div class="presentation-main-title">
@@ -512,8 +588,8 @@
             </div>
         </div>
         
-        <!-- Διαφάνεια 3: Ο Πύργος Καραμίχου: Το Μνημείο -->
-        <div class="slide" id="slide3">
+        <!-- Διαφάνεια 4: Ο Πύργος Καραμίχου: Το Μνημείο (πρώην slide3) -->
+        <div class="slide" id="slide4">
             <div class="slide-header">
                 <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
                 <div class="presentation-main-title">
@@ -532,8 +608,8 @@
             </div>
         </div>
         
-        <!-- Διαφάνεια 4: Γέννηση στην Τουρκοκρατία -->
-        <div class="slide" id="slide4">
+        <!-- Διαφάνεια 5: Γέννηση στην Τουρκοκρατία (πρώην slide4) -->
+        <div class="slide" id="slide5">
             <div class="slide-header">
                 <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
                 <div class="presentation-main-title">
@@ -552,8 +628,8 @@
             </div>
         </div>
         
-        <!-- Διαφάνεια 5: Η Ιστορία των Ιδιοκτητών -->
-        <div class="slide" id="slide5">
+        <!-- Διαφάνεια 6: Η Ιστορία των Ιδιοκτητών (πρώην slide5) -->
+        <div class="slide" id="slide6">
             <div class="slide-header">
                 <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
                 <div class="presentation-main-title">
@@ -572,8 +648,8 @@
             </div>
         </div>
         
-        <!-- Διαφάνεια 6: Ο Θρύλος του Λιμού -->
-        <div class="slide no-image" id="slide6">
+        <!-- Διαφάνεια 7: Ο Θρύλος του Λιμού (πρώην slide6) -->
+        <div class="slide no-image" id="slide7">
             <div class="slide-header">
                 <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
                 <div class="presentation-main-title">
@@ -590,8 +666,8 @@
             </div>
         </div>
         
-        <!-- Διαφάνεια 7: Η Αναγέννηση: Κέντρο Ψηφιακής Φωτογραφίας -->
-        <div class="slide no-image" id="slide7">
+        <!-- Διαφάνεια 8: Η Αναγέννηση: Κέντρο Ψηφιακής Φωτογραφίας (πρώην slide7) -->
+        <div class="slide no-image" id="slide8">
             <div class="slide-header">
                 <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
                 <div class="presentation-main-title">
@@ -608,8 +684,8 @@
             </div>
         </div>
         
-        <!-- Διαφάνεια 8: Ο Τίτλος Που Τα Λέει Όλα -->
-        <div class="slide" id="slide8">
+        <!-- Διαφάνεια 9: Ο Τίτλος Που Τα Λέει Όλα (πρώην slide8) -->
+        <div class="slide" id="slide9">
             <div class="slide-header">
                 <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
                 <div class="presentation-main-title">
@@ -621,7 +697,7 @@
             <div class="slide-content">
                 <div class="text-content">
                     <p>Η έκθεση του Πολιτιστικού Συλλόγου Βασιλί φέρει τον τίτλο:</p>
-                    <p style="font-style: italic; font-weight: bold; color: #8a6d3b; font-size: 1.2rem; margin: 15px 0;">«Ρυθμοί της Γης, Ανάσες των Ανθρώπων. Από το όργωμα στον αργαλειό: Εικόνες ζωής από την ελληνική ύπαιθρο»</p>
+                    <p style="font-style: italic; font-weight: bold; color: #bbdefb; font-size: 1.2rem; margin: 15px 0;">«Ρυθμοί της Γης, Ανάσες των Ανθρώπων. Από το όργωμα στον αργαλειό: Εικόνες ζωής από την ελληνική ύπαιθρο»</p>
                     <p>Ο τίτλος υπογραμμίζει τη σύνδεση της αγροτικής εργασίας («όργωμα») με την οικογενειακή και κοινωνική ζωή («αργαλειός»).</p>
                 </div>
                 <div class="image-content">
@@ -630,8 +706,8 @@
             </div>
         </div>
         
-        <!-- Διαφάνεια 9: Εικόνες Ζωής Πριν τη Μεγάλη Αλλαγή -->
-        <div class="slide" id="slide9">
+        <!-- Διαφάνεια 10: Εικόνες Ζωής Πριν τη Μεγάλη Αλλαγή (πρώην slide9) -->
+        <div class="slide" id="slide10">
             <div class="slide-header">
                 <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
                 <div class="presentation-main-title">
@@ -651,8 +727,8 @@
             </div>
         </div>
         
-        <!-- Διαφάνεια 10: Η Πηγή των Εκθεμάτων: Αναβίωση -->
-        <div class="slide no-image" id="slide10">
+        <!-- Διαφάνεια 11: Η Πηγή των Εκθεμάτων: Αναβίωση (πρώην slide10) -->
+        <div class="slide no-image" id="slide11">
             <div class="slide-header">
                 <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
                 <div class="presentation-main-title">
@@ -669,8 +745,8 @@
             </div>
         </div>
         
-        <!-- Διαφάνεια 11: Ο Ρόλος του Φωτογράφου -->
-        <div class="slide" id="slide11">
+        <!-- Διαφάνεια 12: Ο Ρόλος του Φωτογράφου (πρώην slide11) -->
+        <div class="slide" id="slide12">
             <div class="slide-header">
                 <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
                 <div class="presentation-main-title">
@@ -689,8 +765,8 @@
             </div>
         </div>
         
-        <!-- Διαφάνεια 12: Τα Υλικά Τεκμήρια -->
-        <div class="slide no-image" id="slide12">
+        <!-- Διαφάνεια 12: Τα Υλικά Τεκμήρια (πρώην slide12) -->
+        <div class="slide no-image" id="slide13">
             <div class="slide-header">
                 <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
                 <div class="presentation-main-title">
@@ -701,34 +777,15 @@
             </div>
             <div class="slide-content">
                 <div class="text-content">
-                    <p>Πέραν του φωτογραφικού υλικού, η έκθεση πλαισιώνεται και από υλικά τεκμήρια, καθώς εκτίθεται και μέρος της λαογραφικής συλλογής του Ηλία Δημόπουλου, προσθέτοντας βάθος στην αφήγηση της αγροτικής ζωής.</p>
+                    <p>Πέραν του φωτογραφικού υλικού, η έκθεση πλαισιώνεται και από υλικά τεκμήρια, καθώς εκτίθεται και μέρος της λαογραφικής συλλογής του Ηλίας Δημόπουλου, προσθέτοντας βάθος στην αφήγηση της αγροτικής ζωής.</p>
                 </div>
             </div>
         </div>
         
-        <!-- Διαφάνεια 13: Μακραίωνη Ιστορία: Η Περιοχή της Φθίας -->
-        <div class="slide" id="slide13">
-            <div class="slide-header">
-                <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
-                <div class="presentation-main-title">
-                    <div class="title-line-1">Ρυθμοί της Γης και Μνήμης</div>
-                    <div class="title-line-2">Η Διπλή Κληρονομιά του Βασιλί στα Φάρσαλα</div>
-                </div>
-                <div class="slide-title-header">Μακραίωνη Ιστορία: Η Περιοχή της Φθίας</div>
-            </div>
-            <div class="slide-content">
-                <div class="text-content">
-                    <p>Η ευρύτερη περιοχή των Φαρσάλων, όπου ανήκει το Βασιλί, έχει συνεχή κατοίκηση από τη Νεολιθική περίοδο.</p>
-                    <p>Η αρχαία Φάρσαλος ταυτίζεται με την ομηρική Φθία, την πατρίδα του Αχιλλέα και των Μυρμιδόνων.</p>
-                </div>
-                <div class="image-content">
-                    <img src="https://raw.githubusercontent.com/conchr/Vasili/main/FarsalaMap.jpg" alt="Χάρτης της περιοχής Φαρσάλων" class="slide-image" data-lightbox>
-                </div>
-            </div>
-        </div>
+        <!-- Διαφάνεια 14 ΑΦΑΙΡΕΘΗΚΕ -->
         
-        <!-- Διαφάνεια 14: Η Παλαιά Ονομασία: «Οντοκλάρι» -->
-        <div class="slide no-image" id="slide14">
+        <!-- Διαφάνεια 15: Η Παλαιά Ονομασία: «Οντοκλάρι» (πρώην slide14) -->
+        <div class="slide no-image" id="slide15">
             <div class="slide-header">
                 <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
                 <div class="presentation-main-title">
@@ -744,8 +801,8 @@
             </div>
         </div>
         
-        <!-- Διαφάνεια 15: Πότε και Πώς Κατοικήθηκε; -->
-        <div class="slide" id="slide15">
+        <!-- Διαφάνεια 16: Πότε και Πώς Κατοικήθηκε; (πρώην slide15) -->
+        <div class="slide" id="slide16">
             <div class="slide-header">
                 <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
                 <div class="presentation-main-title">
@@ -756,7 +813,7 @@
             </div>
             <div class="slide-content">
                 <div class="text-content">
-                    <p>Η κατοίκηση της περιοχής Βασιλί χρονολογείται τουλάχιστον από την Οθωμανική περίοδο, καθώς αναφέρεται ως μικρό χωριό («Οντοκλάρι») στον κεντρικό δρόμο Λάρισας–Φαρσάλων.</p>
+                    <p>Η κατοίκηση της περιοχής Βασιλί χρονολογείται τουλάχιστον από την Οθωμανική περίοδο στον κεντρικό δρόμο Λάρισας–Φαρσάλων.</p>
                     <p>Αυτή η στρατηγική θέση συνετέλεσε στη μακρά του ιστορία, με τη σημερινή ονομασία να δίνεται αργότερα, στο πλαίσιο της μετονομασίας τοπωνυμίων.</p>
                 </div>
                 <div class="image-content">
@@ -765,8 +822,8 @@
             </div>
         </div>
         
-        <!-- Διαφάνεια 16: Οι Κάτοικοι και το Επάγγελμα: Η Γη -->
-        <div class="slide no-image" id="slide16">
+        <!-- Διαφάνεια 17: Οι Κάτοικοι και το Επάγγελμα: Η Γη (πρώην slide16) -->
+        <div class="slide no-image" id="slide17">
             <div class="slide-header">
                 <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
                 <div class="presentation-main-title">
@@ -782,8 +839,8 @@
             </div>
         </div>
         
-        <!-- Διαφάνεια 17: Η Δύναμη του Συνεταιρισμού -->
-        <div class="slide no-image" id="slide17">
+        <!-- Διαφάνεια 18: Η Δύναμη του Συνεταιρισμού (πρώην slide17) -->
+        <div class="slide no-image" id="slide18">
             <div class="slide-header">
                 <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
                 <div class="presentation-main-title">
@@ -800,8 +857,8 @@
             </div>
         </div>
         
-        <!-- Διαφάνεια 18: Η Δημογραφική Πρόκληση των Φαρσάλων -->
-        <div class="slide no-image" id="slide18">
+        <!-- Διαφάνεια 19: Η Δημογραφική Πρόκληση των Φαρσάλων (πρώην slide18) -->
+        <div class="slide no-image" id="slide19">
             <div class="slide-header">
                 <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
                 <div class="presentation-main-title">
@@ -819,8 +876,8 @@
             </div>
         </div>
         
-        <!-- Διαφάνεια 19: Πολιτισμός: Ο Μηχανισμός Ανθεκτικότητας -->
-        <div class="slide no-image" id="slide19">
+        <!-- Διαφάνεια 20: Πολιτισμός: Ο Μηχανισμός Ανθεκτικότητας (πρώην slide19) -->
+        <div class="slide no-image" id="slide20">
             <div class="slide-header">
                 <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
                 <div class="presentation-main-title">
@@ -837,8 +894,8 @@
             </div>
         </div>
         
-        <!-- Διαφάνεια 20: Μια Επίκαιρη Ανάγκη -->
-        <div class="slide no-image" id="slide20">
+        <!-- Διαφάνεια 21: Μια Επίκαιρη Ανάγκη (πρώην slide20) -->
+        <div class="slide no-image" id="slide21">
             <div class="slide-header">
                 <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
                 <div class="presentation-main-title">
@@ -856,8 +913,8 @@
             </div>
         </div>
         
-        <!-- Διαφάνεια 21: Πρόταση 1: Διαδρομές Αγροτικής Κληρονομιάς -->
-        <div class="slide no-image" id="slide21">
+        <!-- Διαφάνεια 22: Πρόταση 1: Διαδρομές Αγροτικής Κληρονομιάς (πρώην slide21) -->
+        <div class="slide no-image" id="slide22">
             <div class="slide-header">
                 <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
                 <div class="presentation-main-title">
@@ -874,8 +931,8 @@
             </div>
         </div>
         
-        <!-- Διαφάνεια 22: Πρόταση 2: Brand Identity και Τουρισμός -->
-        <div class="slide no-image" id="slide22">
+        <!-- Διαφάνεια 23: Πρόταση 2: Brand Identity και Τουρισμός (πρώην slide22) -->
+        <div class="slide no-image" id="slide23">
             <div class="slide-header">
                 <div class="municipality">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
                 <div class="presentation-main-title">
@@ -894,17 +951,13 @@
         
         <div class="slide-counter"><span id="current-slide">1</span>/<span id="total-slides">22</span></div>
         
-        <div class="navigation">
-            <button class="nav-btn" id="prev-btn">Προηγούμενη</button>
-            <button class="nav-btn" id="next-btn">Επόμενη</button>
-        </div>
+        <!-- Αφαιρέσαμε τα κουμπιά πλοήγησης αλλά κρατάμε το div για μελλοντική χρήση -->
+        <div class="navigation"></div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const slides = document.querySelectorAll('.slide');
-            const prevBtn = document.getElementById('prev-btn');
-            const nextBtn = document.getElementById('next-btn');
             const currentSlideSpan = document.getElementById('current-slide');
             const totalSlidesSpan = document.getElementById('total-slides');
             
@@ -927,26 +980,6 @@
             // Αρχικοποίηση: εμφάνιση πρώτης διαφάνειας
             slides[currentSlideIndex].classList.add('active');
             updateSlideCounter();
-            
-            // Λειτουργία για επόμενη διαφάνεια
-            nextBtn.addEventListener('click', function() {
-                if (currentSlideIndex < totalSlides - 1) {
-                    slides[currentSlideIndex].classList.remove('active');
-                    currentSlideIndex++;
-                    slides[currentSlideIndex].classList.add('active');
-                    updateSlideCounter();
-                }
-            });
-            
-            // Λειτουργία για προηγούμενη διαφάνεια
-            prevBtn.addEventListener('click', function() {
-                if (currentSlideIndex > 0) {
-                    slides[currentSlideIndex].classList.remove('active');
-                    currentSlideIndex--;
-                    slides[currentSlideIndex].classList.add('active');
-                    updateSlideCounter();
-                }
-            });
             
             // Πλοήγηση με πλήκτρα πληκτρολογίου
             document.addEventListener('keydown', function(event) {
@@ -978,9 +1011,6 @@
             function updateSlideCounter() {
                 currentSlideSpan.textContent = currentSlideIndex + 1;
             }
-            
-            // Απενεργοποίηση κλικ σε διαφάνεια για αλλαγή σελίδας
-            // Δεν προσθέτουμε event listener για κλικ στις διαφάνειες
             
             // Προσθήκη support για swipe gestures σε κινητές συσκευές
             let touchStartX = 0;
